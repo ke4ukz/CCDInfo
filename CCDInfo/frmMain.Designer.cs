@@ -23,6 +23,7 @@
 		///  the contents of this method with the code editor.
 		/// </summary>
 		private void InitializeComponent() {
+			this.components = new System.ComponentModel.Container();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
 			this.cmdBrowse = new System.Windows.Forms.Button();
@@ -33,12 +34,16 @@
 			this.lsvData = new System.Windows.Forms.ListView();
 			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.copyValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.copyNameAndValueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
+			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// tableLayoutPanel1
@@ -75,10 +80,10 @@
 			// 
 			// cmdBrowse
 			// 
-			this.cmdBrowse.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.cmdBrowse.Location = new System.Drawing.Point(757, 5);
+			this.cmdBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.cmdBrowse.Location = new System.Drawing.Point(757, 3);
 			this.cmdBrowse.Name = "cmdBrowse";
-			this.cmdBrowse.Size = new System.Drawing.Size(27, 23);
+			this.cmdBrowse.Size = new System.Drawing.Size(34, 28);
 			this.cmdBrowse.TabIndex = 0;
 			this.cmdBrowse.Text = "...";
 			this.cmdBrowse.UseVisualStyleBackColor = true;
@@ -138,13 +143,16 @@
 			this.lsvData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+			this.lsvData.ContextMenuStrip = this.contextMenuStrip1;
 			this.lsvData.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lsvData.FullRowSelect = true;
 			this.lsvData.Location = new System.Drawing.Point(0, 0);
 			this.lsvData.Name = "lsvData";
 			this.lsvData.Size = new System.Drawing.Size(526, 404);
 			this.lsvData.TabIndex = 0;
 			this.lsvData.UseCompatibleStateImageBehavior = false;
 			this.lsvData.View = System.Windows.Forms.View.Details;
+			this.lsvData.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsvData_KeyDown);
 			// 
 			// columnHeader1
 			// 
@@ -155,6 +163,29 @@
 			// 
 			this.columnHeader2.Text = "Value";
 			this.columnHeader2.Width = 400;
+			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyValueToolStripMenuItem,
+            this.copyNameAndValueToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(192, 48);
+			this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+			// 
+			// copyValueToolStripMenuItem
+			// 
+			this.copyValueToolStripMenuItem.Name = "copyValueToolStripMenuItem";
+			this.copyValueToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.copyValueToolStripMenuItem.Text = "&Copy Value";
+			this.copyValueToolStripMenuItem.Click += new System.EventHandler(this.copyValueToolStripMenuItem_Click);
+			// 
+			// copyNameAndValueToolStripMenuItem
+			// 
+			this.copyNameAndValueToolStripMenuItem.Name = "copyNameAndValueToolStripMenuItem";
+			this.copyNameAndValueToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+			this.copyNameAndValueToolStripMenuItem.Text = "Copy &Name and Value";
+			this.copyNameAndValueToolStripMenuItem.Click += new System.EventHandler(this.copyNameAndValueToolStripMenuItem_Click);
 			// 
 			// frmMain
 			// 
@@ -175,6 +206,7 @@
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
+			this.contextMenuStrip1.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -191,5 +223,8 @@
 		private ListView lsvData;
 		private ColumnHeader columnHeader1;
 		private ColumnHeader columnHeader2;
+		private ContextMenuStrip contextMenuStrip1;
+		private ToolStripMenuItem copyValueToolStripMenuItem;
+		private ToolStripMenuItem copyNameAndValueToolStripMenuItem;
 	}
 }
