@@ -155,6 +155,31 @@ namespace CCDInfo {
 
 		}
 
+		private void copySelectedValuesToClipboard() {
+			if (lsvData.SelectedItems.Count == 0) {
+				System.Media.SystemSounds.Asterisk.Play();
+				return;
+			}
+			List<string> toClipboard = new List<string>();
+			foreach (ListViewItem item in lsvData.SelectedItems) {
+				toClipboard.Add(item.SubItems[1].Text);
+			}
+			Clipboard.SetText(String.Join("\x0D\x0A", toClipboard.ToArray()));
+		}
+
+		private void copySelectedNamesAndValuesToClipboard() {
+			if (lsvData.SelectedItems.Count == 0) {
+				System.Media.SystemSounds.Asterisk.Play();
+				return;
+			}
+
+			List<string> toClipboard = new List<string>();
+			foreach (ListViewItem item in lsvData.SelectedItems) {
+				toClipboard.Add(item.SubItems[0].Text + ": " + item.SubItems[1].Text);
+			}
+			Clipboard.SetText(String.Join("\x0D\x0A", toClipboard.ToArray()));
+		}
+
 		public frmMain() {
 			InitializeComponent();
 		}
@@ -189,6 +214,28 @@ namespace CCDInfo {
 
 		private void txtCCDPKG_Leave(object sender, EventArgs e) {
 			openCCDFile(txtCCDPKG.Text);
+		}
+
+		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) {
+			copyValueToolStripMenuItem.Enabled = (lsvData.SelectedItems.Count > 0);
+			copyNameAndValueToolStripMenuItem.Enabled = (lsvData.SelectedItems.Count > 0);
+		}
+
+		private void copyValueToolStripMenuItem_Click(object sender, EventArgs e) {
+			copySelectedValuesToClipboard();
+		}
+
+		private void copyNameAndValueToolStripMenuItem_Click(object sender, EventArgs e) {
+			copySelectedNamesAndValuesToClipboard();
+		}
+
+		private void lsvData_KeyDown(object sender, KeyEventArgs e) {
+
+			if (e.Control && e.KeyCode == Keys.C) {
+				Debug.Print("CTRL+C");
+				copySelectedNamesAndValuesToClipboard();
+			}
+
 		}
 	}
 }
